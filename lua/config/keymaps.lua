@@ -56,7 +56,7 @@ map("n", "<leader>se", "<C-w>=", { desc = "Equalize Splits" })
 
 -- Find files and open in vertical split
 map("n", "<leader>fv", function()
-  require("telescope.builtin").find_files()
+    require("telescope.builtin").find_files()
 end, { desc = "Find Files (use Ctrl-v for split)" })
 
 -- =========================================================
@@ -78,7 +78,7 @@ map("n", "<S-Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Jump to tabs 1-9
 for i = 1, 9 do
-  map("n", "<leader>" .. i, i .. "gt", { desc = "Go to Tab " .. i })
+    map("n", "<leader>" .. i, i .. "gt", { desc = "Go to Tab " .. i })
 end
 
 -- Move tabs left/right
@@ -169,3 +169,15 @@ map("n", "<leader>x", "<cmd>!chmod +x %<cr>", { desc = "Make File Executable" })
 
 -- Open current file with default macOS application
 map("n", "<leader>ob", "<cmd>!open %<cr>", { desc = "Open in Default App" })
+
+-- Invert horizontal scrolling in Normal mode
+vim.keymap.set("n", "<ScrollWheelLeft>", "<ScrollWheelRight>", { silent = true })
+vim.keymap.set("n", "<ScrollWheelRight>", "<ScrollWheelLeft>", { silent = true })
+
+-- Invert horizontal scrolling in Visual mode
+vim.keymap.set("v", "<ScrollWheelLeft>", "<ScrollWheelRight>", { silent = true })
+vim.keymap.set("v", "<ScrollWheelRight>", "<ScrollWheelLeft>", { silent = true })
+
+-- Invert horizontal scrolling in Insert mode
+vim.keymap.set("i", "<ScrollWheelLeft>", "<ScrollWheelRight>", { silent = true })
+vim.keymap.set("i", "<ScrollWheelRight>", "<ScrollWheelLeft>", { silent = true })
