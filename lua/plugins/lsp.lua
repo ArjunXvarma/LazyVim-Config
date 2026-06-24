@@ -7,10 +7,15 @@ return {
                     cmd = {
                         "clangd",
                         "--background-index",
-                        "--clang-tidy",
                         "--completion-style=detailed",
-                        "--header-insertion=iwyu",
-                        "--query-driver=/opt/homebrew/bin/clang++,/opt/homebrew/bin/clang,/usr/bin/clang,/usr/bin/clang++",
+                        "--fallback-style=llvm", -- used when no config found
+                    },
+                    init_options = {
+                        fallbackFlags = {
+                            "-std=c++17",
+                            "-stdlib=libc++",
+                            "-isysroot/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+                        },
                     },
                 },
             },

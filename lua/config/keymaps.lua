@@ -34,10 +34,11 @@ map("n", "N", "Nzzzv", opts)
 -- Window Navigation
 -- =========================================================
 
-map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window" })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window" })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window" })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window" })
+-- Now handled by vim tmux
+-- map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window" })
+-- map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window" })
+-- map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window" })
+-- map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window" })
 
 -- Resize windows
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
