@@ -147,9 +147,20 @@ These are foundational Vim commands worth knowing on top of the custom mappings 
 
 **File Explorer**
 
-| Key         | Action                                |
-| ----------- | ------------------------------------- |
-| `<leader>e` | Toggle Neo-tree (reveal current file) |
+| Key         | Action                     |
+| ----------- | -------------------------- |
+| `<leader>e` | Toggle Neo-tree (Root Dir) |
+
+> ⚠️ `keymaps.lua` maps `<leader>e` to `Neotree reveal toggle`, but LazyVim's Neo-tree spec overrides it with **Explorer NeoTree (Root Dir)** once Neo-tree loads.
+
+**Search**
+
+| Key          | Action                                                               |
+| ------------ | -------------------------------------------------------------------- |
+| `<leader>fd` | Live grep in the current file's directory (cwd for non-file buffers) |
+| `<leader>fh` | Help tags                                                            |
+
+> ⚠️ `keymaps.lua` also maps `<leader>ff`, `<leader>fg`, and `<leader>fb`, but LazyVim's Telescope spec overrides them once Telescope loads (see the Telescope section below). In particular, `<leader>fg` is **Find files (git-files)**, not live grep -- use `<leader>/` or `<leader>sg` for live grep.
 
 **Git**
 
@@ -180,8 +191,8 @@ These are foundational Vim commands worth knowing on top of the custom mappings 
 
 ### Telescope (LazyVim Defaults)
 
-These come straight from LazyVim's Telescope plugin spec — no custom overrides.
-`Root Dir` = project root detected by LazyVim; `cwd` = current working directory.
+These come straight from LazyVim's Telescope plugin spec, and they win over the same keys in `keymaps.lua`.
+`Root Dir` = project root detected by LazyVim (LSP root, else `.git`); `cwd` = Neovim's working directory, i.e. where `nvim` was launched -- **not** the current file's folder (use `<leader>fd` for that).
 `<leader>ff` automatically uses `git_files` in a git repo and `find_files` otherwise.
 
 **Find**
@@ -201,15 +212,19 @@ These come straight from LazyVim's Telescope plugin spec — no custom overrides
 
 **Grep / Search**
 
-| Key          | Action                                                            |
-| ------------ | ----------------------------------------------------------------- |
-| `<leader>/`  | Live grep (Root Dir)                                              |
-| `<leader>sg` | Live grep (Root Dir)                                              |
-| `<leader>sG` | Live grep (cwd)                                                   |
-| `<leader>sw` | Grep word under cursor (Root Dir); in visual mode: grep selection |
-| `<leader>sW` | Grep word under cursor (cwd); in visual mode: grep selection      |
-| `<leader>sb` | Fuzzy find in current buffer                                      |
-| `<leader>sR` | Resume last picker                                                |
+| Key          | Action                                                                       |
+| ------------ | ---------------------------------------------------------------------------- |
+| `<leader>/`  | Live grep (Root Dir)                                                         |
+| `<leader>sg` | Live grep (Root Dir)                                                         |
+| `<leader>sG` | Live grep (cwd)                                                              |
+| `<leader>sw` | Grep word under cursor (Root Dir); in visual mode: grep selection            |
+| `<leader>sW` | Grep word under cursor (cwd); in visual mode: grep selection                 |
+| `<leader>fd` | Live grep in the current file's directory (custom)                           |
+| `<leader>sb` | Fuzzy find in current buffer                                                 |
+| `<leader>sR` | Resume last picker                                                           |
+| `<leader>sr` | Search and replace (grug-far); has a **Paths** field to limit to a directory |
+
+To grep an arbitrary directory: `:Telescope live_grep search_dirs=db/compaction` (comma-separate multiple dirs; paths are relative to cwd).
 
 **Vim / Meta**
 
@@ -238,12 +253,15 @@ These come straight from LazyVim's Telescope plugin spec — no custom overrides
 
 **Inside a Telescope picker**
 
-| Key               | Action                            |
-| ----------------- | --------------------------------- |
-| `<A-h>`           | Toggle hidden files (find_files)  |
-| `<A-i>`           | Toggle ignored files (find_files) |
-| `<C-t>`           | Open results in Trouble           |
-| `q` (normal mode) | Close picker                      |
+| Key               | Action                              |
+| ----------------- | ----------------------------------- |
+| `<A-h>`           | Toggle hidden files (find_files)    |
+| `<A-i>`           | Toggle ignored files (find_files)   |
+| `<C-t>`           | Open results in Trouble             |
+| `<C-v>` / `<C-x>` | Open in vertical / horizontal split |
+| `<C-q>`           | Send all results to quickfix list   |
+| `<C-n>` / `<C-p>` | Next / previous result              |
+| `q` (normal mode) | Close picker                        |
 
 ---
 

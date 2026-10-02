@@ -149,6 +149,12 @@ map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help Tags" })
 
+-- Live grep in the current file's directory (falls back to cwd for non-file buffers)
+map("n", "<leader>fd", function()
+    local dir = vim.bo.buftype == "" and vim.fn.expand("%:p:h") or vim.uv.cwd()
+    require("telescope.builtin").live_grep({ cwd = dir, prompt_title = "Grep in " .. vim.fn.fnamemodify(dir, ":~:.") })
+end, { desc = "Grep (File's Dir)" })
+
 -- =========================================================
 -- Git
 -- =========================================================
